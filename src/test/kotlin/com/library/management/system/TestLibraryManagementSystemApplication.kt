@@ -1,4 +1,4 @@
-package com.library.management.system.librarymanagementsystem
+package com.library.management.system
 
 import org.springframework.boot.fromApplication
 import org.springframework.boot.test.context.TestConfiguration
@@ -27,5 +27,6 @@ class TestLibraryManagementSystemApplication {
 }
 
 fun main(args: Array<String>) {
-	fromApplication<LibraryManagementSystemApplication>().with(TestLibraryManagementSystemApplication::class).run(*args)
+	fromApplication<LibraryManagementSystemApplication>().with(
+        TestLibraryManagementSystemApplication::class).run(*args)
 }

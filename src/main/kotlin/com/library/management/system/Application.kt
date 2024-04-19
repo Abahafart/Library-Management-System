@@ -1,4 +1,4 @@
-package com.library.management.system.librarymanagementsystem
+package com.library.management.system
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
