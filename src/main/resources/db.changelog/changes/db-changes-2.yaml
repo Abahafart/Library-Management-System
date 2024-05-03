@@ -89,6 +89,13 @@ databaseChangeLog:
               - column:
                   name: active
                   type: boolean
+              - column:
+                  name: account_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_account_id
+                    references: tbl_account(id)
         - createTable:
             tableName: tbl_book_reservation
             columns:
@@ -140,6 +147,13 @@ databaseChangeLog:
                     nullable: false
                     foreignKeyName: fk_book_item_id
                     references: tbl_book_item(id)
+              - column:
+                  name: account_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_account_id
+                    references: tbl_account(id)
         - createTable:
             tableName: tbl_fine
             columns:

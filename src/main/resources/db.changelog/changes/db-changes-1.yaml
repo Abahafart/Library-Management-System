@@ -148,6 +148,12 @@ databaseChangeLog:
                   type: int
                   constraints:
                     nullable: false
+              - column:
+                  name: author_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_author_id
+                    references: tbl_author(id)
         - createTable:
             tableName: tbl_rack
             columns:
