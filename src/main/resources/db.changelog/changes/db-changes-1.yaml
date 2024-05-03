@@ -1,0 +1,271 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: alfredo.miranda.learning@gmail.com
+      comment: model for book and author and catalogs
+      changes:
+        - createTable:
+            tableName: cat_payment_method
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: description
+                  type: varchar(30)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: timestamp
+        - createTable:
+            tableName: cat_book_format
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: description
+                  type: varchar(30)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: timestamp
+        - createTable:
+            tableName: cat_book_status
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: description
+                  type: varchar(30)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: timestamp
+        - createTable:
+            tableName: cat_reservation_status
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: description
+                  type: varchar(30)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: timestamp
+        - createTable:
+            tableName: cat_account_status
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: description
+                  type: varchar(30)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: timestamp
+        - createTable:
+            tableName: tbl_author
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: tbl_book
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: isbn
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: title
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: subject
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: publisher
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: language
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: number_of_pages
+                  type: int
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: tbl_rack
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: number
+                  type: int
+              - column:
+                  name: location_identifier
+                  type: varchar(100)
+        - createTable:
+            tableName: tbl_book_item
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: barcode
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: is_reference_only
+                  type: boolean
+              - column:
+                  name: borrowed
+                  type: date
+              - column:
+                  name: due_date
+                  type: date
+              - column:
+                  name: price
+                  type: numeric(12,2)
+              - column:
+                  name: format
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_book_format
+                    references: cat_book_format(id)
+              - column:
+                  name: book_status
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_book_status
+                    references: cat_book_status(id)
+              - column:
+                  name: date_of_purchase
+                  type: date
+              - column:
+                  name: publication_date
+                  type: date
+              - column:
+                  name: book_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_book_id
+                    references: tbl_book(id)
+              - column:
+                  name: rack_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_rack_id
+                    references: tbl_rack(id)
+        - createTable:
+            tableName: tbl_address
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: street_address
+                  type: varchar(150)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: city
+                  type: varchar(100)
+              - column:
+                  name: state
+                  type: varchar(50)
+              - column:
+                  name: zipcode
+                  type: varchar(6)
+              - column:
+                  name: country
+                  type: varchar(100)
+        - createTable:
+            tableName: tbl_library
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: address_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_address_id
+                    references: tbl_address(id)

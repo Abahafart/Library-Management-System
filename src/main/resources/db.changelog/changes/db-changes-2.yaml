@@ -1,0 +1,206 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2
+      author: alfredo.miranda.learning@gmail.com
+      comment: model account, library, barcode
+      changes:
+        - createTable:
+            tableName: tbl_person
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: address_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_address_id
+                    references: tbl_address(id)
+              - column:
+                  name: email
+                  type: varchar(200)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: phone
+                  type: varchar(15)
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: tbl_account
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: password
+                  type: varchar(200)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: account_status_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_account_status_id
+                    references: cat_account_status(id)
+              - column:
+                  name: person_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_person_id
+                    references: tbl_person(id)
+              - column:
+                  name: created_at
+                  type: timestamp
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: tbl_library_card
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: card_number
+                  type: varchar(100)
+              - column:
+                  name: barcode
+                  type: varchar(100)
+              - column:
+                  name: issue_at
+                  type: date
+              - column:
+                  name: active
+                  type: boolean
+        - createTable:
+            tableName: tbl_book_reservation
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: creation_date
+                  type: timestamp
+              - column:
+                  name: reservation_status_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_reservation_status_id
+                    references: cat_reservation_status(id)
+              - column:
+                  name: book_item_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_book_item_id
+                    references: tbl_book_item(id)
+        - createTable:
+            tableName: tbl_book_lending
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: creation_date
+                  type: timestamp
+              - column:
+                  name: due_date
+                  type: date
+              - column:
+                  name: return_date
+                  type: date
+              - column:
+                  name: book_item_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_book_item_id
+                    references: tbl_book_item(id)
+        - createTable:
+            tableName: tbl_fine
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: amount
+                  type: numeric(12,2)
+              - column:
+                  name: account_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_account_id
+                    references: tbl_account(id)
+              - column:
+                  name: book_item_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_book_item_id
+                    references: tbl_book_item(id)
+        - createTable:
+            tableName: tbl_fine_transaction
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: creation_date
+                  type: timestamp
+              - column:
+                  name: fine_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_fine_id
+                    references: tbl_fine(id)
+              - column:
+                  name: card
+                  type: varchar(16)
+              - column:
+                  name: bank_name
+                  type: varchar(100)
+              - column:
+                  name: check_number
+                  type: varchar(10)
+              - column:
+                  name: card_name
+                  type: varchar(100)
+              - column:
+                  name: payment_method_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_payment_method_id
+                    references: cat_payment_method(id)
