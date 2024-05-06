@@ -20,3 +20,10 @@ class CatReservationStatusEntity(
     @Column val createdAt: Instant = Instant.now(),
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) val id: Long? = null
 )
+
+@Entity(name = "cat_book_status")
+class CatBookStatusEntity(
+    @Column val description: String,
+    @Column val createdAt: Instant = Instant.now(),
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) val id: Long? = null
+)

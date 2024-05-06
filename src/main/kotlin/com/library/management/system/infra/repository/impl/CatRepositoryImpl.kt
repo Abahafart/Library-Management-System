@@ -1,22 +1,26 @@
 package com.library.management.system.infra.repository.impl
 
 import com.library.management.system.domain.model.CatAccountStatusDO
+import com.library.management.system.domain.model.CatBookStatusDO
 import com.library.management.system.domain.model.CatReservationStatusDO
 import com.library.management.system.domain.repository.CatAccountStatusRepository
+import com.library.management.system.domain.repository.CatBookStatusRepository
 import com.library.management.system.domain.repository.CatReservationStatusRepository
 import com.library.management.system.infra.repository.CatAccountStatusJPARepository
+import com.library.management.system.infra.repository.CatBookStatusJPARepository
 import com.library.management.system.infra.repository.CatReservationStatusJPARepository
 import com.library.management.system.infra.repository.entities.CatAccountStatusEntity
+import com.library.management.system.infra.repository.entities.CatBookStatusEntity
 import com.library.management.system.infra.repository.entities.CatReservationStatusEntity
 import org.springframework.stereotype.Repository
 
 @Repository
-class CatAccountRepositoryImpl(val catAccountStatusJPARepository: CatAccountStatusJPARepository): CatAccountStatusRepository {
+class CatAccountRepositoryImpl(val repository: CatAccountStatusJPARepository): CatAccountStatusRepository {
 
     override fun create(catAccountStatusDO: CatAccountStatusDO): CatAccountStatusDO {
         val entity = CatAccountStatusEntity(description = catAccountStatusDO.description)
-        val accountStatusEntity = catAccountStatusJPARepository.save(entity)
-        return buildDO(accountStatusEntity)
+        repository.save(entity)
+        return buildDO(entity)
     }
 
     fun buildDO(catAccountStatusEntity: CatAccountStatusEntity): CatAccountStatusDO {
@@ -27,17 +31,33 @@ class CatAccountRepositoryImpl(val catAccountStatusJPARepository: CatAccountStat
 }
 
 @Repository
-class CatReservationRepositoryImpl(val catReservationStatusJPARepository: CatReservationStatusJPARepository):
+class CatReservationRepositoryImpl(val repository: CatReservationStatusJPARepository):
     CatReservationStatusRepository {
     override fun create(catReservationStatus: CatReservationStatusDO): CatReservationStatusDO {
         val entity = CatReservationStatusEntity(description = catReservationStatus.description)
-        val reservationEntity = catReservationStatusJPARepository.save(entity)
-        return buildDO(reservationEntity)
+        repository.save(entity)
+        return buildDO(entity)
     }
 
     fun buildDO(catReservationStatusEntity: CatReservationStatusEntity): CatReservationStatusDO {
         return CatReservationStatusDO(id = catReservationStatusEntity.id, description = catReservationStatusEntity.description,
             createdAt = catReservationStatusEntity.createdAt)
+    }
+
+}
+
+@Repository
+class CatBookStatusRepositoryImpl(val repository: CatBookStatusJPARepository):
+    CatBookStatusRepository {
+    override fun create(catBookStatus: CatBookStatusDO): CatBookStatusDO {
+        val entity = CatBookStatusEntity(description = catBookStatus.description)
+        repository.save(entity)
+        return buildDO(entity)
+    }
+
+    fun buildDO(entity: CatBookStatusEntity): CatBookStatusDO {
+        return CatBookStatusDO(id = entity.id, description = entity.description,
+            createdAt = entity.createdAt)
     }
 
 }
