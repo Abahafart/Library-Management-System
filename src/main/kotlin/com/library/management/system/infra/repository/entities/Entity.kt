@@ -27,3 +27,10 @@ class CatBookStatusEntity(
     @Column val createdAt: Instant = Instant.now(),
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) val id: Long? = null
 )
+
+@Entity(name = "cat_book_format")
+class CatBookFormatEntity(
+    @Column val description: String,
+    @Column val createdAt: Instant = Instant.now(),
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) val id: Long? = null
+)

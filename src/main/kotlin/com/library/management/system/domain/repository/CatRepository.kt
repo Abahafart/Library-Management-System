@@ -1,6 +1,7 @@
 package com.library.management.system.domain.repository
 
 import com.library.management.system.domain.model.CatAccountStatusDO
+import com.library.management.system.domain.model.CatBookFormatDO
 import com.library.management.system.domain.model.CatBookStatusDO
 import com.library.management.system.domain.model.CatReservationStatusDO
 
@@ -15,4 +16,8 @@ interface CatReservationStatusRepository {
 
 interface CatBookStatusRepository {
     fun create(catBookStatus: CatBookStatusDO): CatBookStatusDO
+}
+
+interface CatBookFormatRepository {
+    fun create(catBookFormat: CatBookFormatDO): CatBookFormatDO
 }

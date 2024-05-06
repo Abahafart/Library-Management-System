@@ -1,6 +1,7 @@
 package com.library.management.system.domain.service
 
 import com.library.management.system.domain.model.CatAccountStatusDO
+import com.library.management.system.domain.model.CatBookFormatDO
 import com.library.management.system.domain.model.CatBookStatusDO
 import com.library.management.system.domain.model.CatReservationStatusDO
 
@@ -17,4 +18,9 @@ interface CatReservationStatusService {
 interface CatBookStatusService {
 
     fun create(catBookStatusDO: CatBookStatusDO): CatBookStatusDO
+}
+
+interface CatBookFormatService {
+
+    fun create(catBookFormatDO: CatBookFormatDO): CatBookFormatDO
 }
