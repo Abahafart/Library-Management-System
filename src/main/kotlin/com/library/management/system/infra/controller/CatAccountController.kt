@@ -11,18 +11,18 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/catalogs")
-class CatController(val catAccountStatusService: CatAccountStatusService) {
+class CatAccountController(val catAccountStatusService: CatAccountStatusService) {
 
     @PostMapping("/accounts")
     fun createAccountStatus(@RequestBody catAccountStatusRequest: CatAccountStatusRequest): CatAccountStatusResponse {
-        return buildResponse(catAccountStatusService.create(buildDO(catAccountStatusRequest)));
+        return buildAccountResponse(catAccountStatusService.create(buildAccountDO(catAccountStatusRequest)));
     }
 
-    fun buildDO(catAccountStatusRequest: CatAccountStatusRequest): CatAccountStatusDO {
+    fun buildAccountDO(catAccountStatusRequest: CatAccountStatusRequest): CatAccountStatusDO {
         return CatAccountStatusDO(description = catAccountStatusRequest.description)
     }
 
-    fun buildResponse(catAccountStatusDO: CatAccountStatusDO): CatAccountStatusResponse {
+    fun buildAccountResponse(catAccountStatusDO: CatAccountStatusDO): CatAccountStatusResponse {
         return CatAccountStatusResponse(id = catAccountStatusDO.id, description = catAccountStatusDO.description,
             createdAt = catAccountStatusDO.createdAt)
     }

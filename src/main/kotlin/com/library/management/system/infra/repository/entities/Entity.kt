@@ -13,3 +13,10 @@ class CatAccountStatusEntity(
     @Column val createdAt: Instant = Instant.now(),
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) val id: Long? = null
 )
+
+@Entity(name = "cat_reservation_status")
+class CatReservationStatusEntity(
+    @Column val description: String,
+    @Column val createdAt: Instant = Instant.now(),
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) val id: Long? = null
+)
